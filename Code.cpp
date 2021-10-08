@@ -177,8 +177,18 @@ struct Node* DeleteAtNthEnd2LL(int pos , Node* head){
    free(temp);
    return head;
 }
+// Reverse through Recursion
+struct Node* ReverseRec(Node* head , Node* prevPtr = NULL){
 
-
+  Node* temp = head;
+    if(temp == NULL){
+    return prevPtr;
+  }
+   head = temp->next;
+   temp->next = prevPtr;
+   prevPtr = temp;
+   return ReverseRec(head,prevPtr);
+}
 
 void displayLL (Node* head){
    if(head == NULL) cout<<"This is empty" ;
