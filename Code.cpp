@@ -190,6 +190,143 @@ struct Node* ReverseRec(Node* head , Node* prevPtr = NULL){
    return ReverseRec(head,prevPtr);
 }
 
+// Mergeing Sorted LL through Extra Space means Creating new LinkedList
+
+Node* MergeSortedLL(Node* head1 , Node* head2){
+            
+   Node* trav1 = head1;
+   Node* trav2 = head2;
+   Node* newLL = NULL;
+   Node* travNew = newLL ;
+ Node* temp ;
+    while(trav1 != NULL && trav2 != NULL ){
+        if(trav1->data <= trav2->data){
+        temp  = createNode(trav1->data);
+        trav1 = trav1->next;
+        }
+        else { 
+         temp = createNode(trav2->data);
+        trav2 =  trav2->next;
+      }
+
+      if(newLL == NULL){
+         newLL = temp ;
+         travNew = temp;
+      }
+      else {
+         travNew->next = temp ;
+         travNew  = temp ;
+      }
+    }
+
+    while(trav1 != NULL){
+      temp = createNode(trav1->data);
+         trav1 = trav1->next;
+
+     if(newLL == NULL){
+         newLL = temp ;
+         travNew = temp;
+      }
+      else {
+         travNew->next = temp ;
+         travNew  = temp ;
+      }    
+}
+
+    while(trav2 != NULL){
+      temp = createNode(trav2->data);
+      trav2 = trav2->next;
+     if(newLL == NULL){
+         newLL = temp ;
+         travNew = temp;
+        
+      }
+      else {
+         travNew->next = temp ;
+         travNew  = temp ;
+        
+      }    
+}
+
+
+return newLL;
+}
+
+
+// I am doing that work through Insertion sort...
+// Merging Through Insertion technique 
+Node* MergeSortedLLInsertion(Node* head1, Node* head2){
+    Node* trav1 = head1;
+    Node* trav2 = head2;
+   
+
+   if(head1 == NULL ) return head2 ;
+   if(head2 == NULL) return head1;
+
+    if(trav1->data > trav2->data)
+      swap(trav1 ,trav2);
+    Node*  prevPtr = trav1;
+    Node* mergeLL  = trav1;
+
+    
+     while(trav1 !=  NULL && trav2 != NULL){
+      
+           while( trav1 != NULL && trav1->data <= trav2->data){
+                 prevPtr  = trav1;
+                 trav1 = trav1->next;
+
+           }
+           prevPtr->next = trav2;
+           swap(trav1,trav2);
+ }  
+    return mergeLL ;
+}
+//1 2 3 4 5 
+/// Finding Middle element O(N) + O(N/2)
+void displayMiddleElementBy1andHalf(Node* head){ 
+    Node* temp = head;
+    int cElement = countLL(head);
+
+    if(head == NULL) return;
+    if(head->next == NULL) return ;
+
+    for(int i = 0 ; i < cElement/2-1; i++)
+       temp = temp->next;
+    cout<<"Middle Element : ";
+      if(cElement%2 == 0) cout<<temp->data<<" and ";
+    cout<<temp->next->data<<endl;
+ }
+
+ //Finding Middle Element through O(N) OR One Pass
+// One Pointer 2X and second Pointer 1X
+ void displayMiddleElementByOnePass(Node* head){
+  Node* t2X = head;
+  Node* t1X = head;
+// this code work for 1 Node perfectly but not run  on 0 node means 
+ // when head is null 
+  if(head == NULL) return ;
+
+          // 1 2 3 4 5 6 7
+         // 1 2 3 4 5 6
+
+              // ODD                     // Even
+      while(t2X->next !=  NULL && t2X->next->next != NULL ){
+             
+            t2X = t2X->next->next;
+            t1X = t1X->next;
+         }
+          cout<< "Second Middle : ";
+         // Odd number of Elements
+         if(t2X->next == NULL)
+          cout<<t1X->data<<endl;
+       else 
+       cout<<t1X->data<< " and "<< t1X->next->data<<endl;
+
+
+ }
+
+
+
 void displayLL (Node* head){
    if(head == NULL) cout<<"This is empty" ;
 
@@ -206,20 +343,35 @@ void displayLL (Node* head){
  
 
 
-  void test(){
-  Node* head = NULL ;
-   head = InsertNodeAtEnd(3,head);
-   head =  InsertNodeAtEnd(5,head);
-   head =  InsertNodeAtEnd(7,head);       
-   head =  InsertNodeAtEnd(8,head);
-   head = InsertAtBegin(98,head);
-   head = DeleteAtBegin(head);
-   head = InsetAtNth(97,4,head);
-   // head = DeleteAtNth(3,head);
-   head = DeleteAtNthEnd2LL(2,head);
-   displayLL(head);
+   void test(){
+  
+ Node* head1 = NULL ; 
+ head1 = InsertAtEnd(3,head1);
+ head1 = InsertAtEnd(5,head1);
+ head1 = InsertAtEnd(5,head1);
+ head1 = InsertAtEnd(7,head1);
+ head1 = InsertAtEnd(8,head1);
 
-  }
+displayMiddleElementBy1andHalf(head1);
+ displayMiddleElementByOnePass(head1);
+
+ Node* head2 = NULL ;
+ head2 = InsertAtEnd(2,head2);
+ head2 = InsertAtEnd(3,head2);
+ head2 = InsertAtEnd(6,head2);
+ head2 = InsertAtEnd(7,head2);
+ head2 = InsertAtEnd(9,head2);
+ displayMiddleElementBy1andHalf(head2);
+
+displayMiddleElementByOnePass(head2);
+Node* head3 = MergeSortedLLInsertion (head1 , head2);
+displayMiddleElementBy1andHalf(head3);
+
+displayMiddleElementByOnePass(head3);
+displayLL(head3);
+
+
+ }
 int main(){
         ll t ;cin>>t;
         while(t--){
