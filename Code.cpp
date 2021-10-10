@@ -325,6 +325,79 @@ void displayMiddleElementBy1andHalf(Node* head){
 
  }
 
+Node* DleteMiddleOnePass(Node* head){
+   Node* txo = head;
+   Node* txs = head;
+ if(head == NULL ) return NULL ;
+ if(head->next == NULL || head->next->next == NULL) return NULL;
+
+
+ Node* prevPtr = head;
+  int i  = 0 ;
+   while(txs->next != NULL && txs->next->next != NULL){
+     if(i != 0)
+      prevPtr = prevPtr->next;
+      i++;
+      txo = txo->next;
+      txs  = txs->next->next; 
+
+   }
+
+if(txs->next == NULL){
+    Node* temp2 = txo;
+    Node* temp = txo;
+
+    temp2 = txo->next;
+    free(temp);
+    prevPtr->next = temp2;
+}
+else {
+      Node* temp2 = txo;
+    Node* temp = txo;
+    Node* temp1 = txo->next;
+    temp2 = txo->next->next;
+    free(temp);
+    free(temp1);
+    prevPtr->next = temp2;
+}
+return head ;
+}
+
+
+Node* InsertAtMiddle(int val , Node* head){
+   Node* txo = head;
+   Node* txs = head;
+Node* newNode = createNode(val);
+if(head == NULL) return newNode;
+
+ Node* prevPtr = head;
+  int i  = 0 ;
+   while(txs->next != NULL && txs->next->next != NULL){
+     if(i != 0)
+      prevPtr = prevPtr->next;
+      i++;
+      txo = txo->next;
+      txs  = txs->next->next; 
+
+   }
+
+if(txs->next == NULL){
+  
+    Node* temp2 = txo->next;
+    newNode->next = temp2;
+    txo->next = newNode;
+    
+    
+   
+}
+else {
+      Node* temp2 = txo->next;
+    newNode->next = temp2;
+    txo->next = newNode;
+
+}
+return head ; 
+}
 
 
 void displayLL (Node* head){
