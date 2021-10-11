@@ -412,7 +412,77 @@ void displayLL (Node* head){
    }
 
 }
+/****  
+Day- 11 Oct I am doing Detection of loop in LinkedList  through
+two method 1 - through unordered_set.
+    method 2 - through Amazing cs sir Algo
 
+Node* initLL(vector<int >& v )
+{ 
+   
+  if(v.size() == 0) return NULL; 
+Node* head = createNode(v[0]);
+
+Node* trav = head;
+int i =  1;
+  while(i < v.size()){
+   trav->next = createNode(v[i]);
+trav = trav->next;
+i++;
+
+  }
+   return  head ; 
+}
+
+
+bool DetectLoopLL(Node* head){
+   unordered_set<Node*> set;
+
+   Node* trav = head; 
+while(trav != NULL){
+      if(set.find(trav) != set.end())
+         return true;
+      
+      set.insert(trav);
+     trav =  trav->next ;}
+     return false; 
+}
+
+bool DetectLoopLL2(Node* head){
+   Node* trav1 = head , *trav2 = head;
+   while(trav2 != NULL && trav2->next->next != NULL){
+      trav2  = trav2->next->next;
+      trav1 =  trav1->next ;
+
+      if(trav1 == trav2) return true;
+   }
+   return false;
+}
+
+
+void displayLL(Node* head){
+
+   Node* temp = head;
+  while(temp != NULL){
+   cout<<temp->data<<" " ;
+   temp = temp ->next ; 
+  }
+}
+
+void test(){
+
+  vector<int> v{1,2,3,4,5,6};
+  Node* head =  NULL; 
+  head = initLL(v);
+ displayLL(head) ;
+ cout<<endl;
+ cout<<DetectLoopLL2(head);
+ head->next->next->next->next->next->next = head->next->next;
+ cout<<DetectLoopLL2(head);
+}
+
+
+****/
  
 
 
