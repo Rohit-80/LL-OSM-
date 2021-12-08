@@ -60,7 +60,34 @@ using namespace std ;
  //        else {
  //            if(b == 0) v.push_back(1);
 
+/*
+ BFS traverser Using Queue ------------------------------
+ 
+ 
+       vector<vector<int>> ans;
+          queue<TreeNode*> q;
+          q.push(root);
+        if(root == NULL) return ans;
+        while(!q.empty()){
+            vector<int> level;
+            int size = q.size();
+           
+            for(int i = 0 ; i < size ;i++){
+                TreeNode* node = q.front();
+                q.pop();
+                if(node->left != NULL) q.push(node->left);
+                if(node->right != NULL) q.push(node->right);
+                 level.push_back(node->val);
+            }
+           
+            
+            ans.push_back(level);
+        }
+     
+        return ans;
+        
 
+*/
 struct Node
 {
      int data ;
