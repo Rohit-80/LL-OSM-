@@ -3,7 +3,9 @@ using namespace std ;
 using ll =  long long   ;
 using db  = long double;
 using str = string ;
-//Loops
+//Loops/jhlhuk htgv fjfcchg jhg ghf vfghf gff
+gjf hf
+wor jkljue rlkfkklsdfjkfdkjj
 #define FOR(i,a,b) for(int i = (a) ; (a) < (b) ; i++);
 #define F0R(a,b) FOR(a,0,b);
 #define each(a,x) for(auto a : x);
